@@ -1,11 +1,13 @@
 //Imports
-// import mongoose from ("mongoose");
+import mongoose from "mongoose";
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv"; //For using process.env
 const app = express();
 const PORT = 8080;
+import userRoute from "./Routes/userRoutes.js";
+import authRoute from "./Routes/authRoutes.js";
 
 //Configurations
 dotenv.config();
@@ -14,25 +16,35 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 //Routes
-// app.use("/user", authRoute);
-// app.use("/admin", adminAuthRoute);
+app.use("/api/user", userRoute);
+app.use("/api/auth", authRoute);
+
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
+    return res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message,
+    });
+});
 
 
-//Database
-// mongoose.set('strictQuery', false);
-// const mongoURL = `mongodb+srv://Taransh:${process.env.Mongo_DB_Password}@cluster0.eq8d4zf.mongodb.net/Loginn?retryWrites=true&w=majority`;
-// mongoose.connect(mongoURL, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// }).then(() => {
-//     console.log("Database connected");
-// }).catch((error) => {
-//     console.log(error);
-// });
+// Database
+mongoose.set('strictQuery', false);
+const mongoURL = `mongodb+srv://taranshchellani121:${process.env.Mongo_DB_Password}@mern-estate.6hozzzg.mongodb.net/?retryWrites=true&w=majority`;
+// const mongoURL = `mongodb+srv://taranshchellani121:12345qwerty@mern-estate.6hozzzg.mongodb.net/?retryWrites=true&w=majority`;
+mongoose.connect(mongoURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log("Database connected");
+}).catch((error) => {
+    console.log(error);
+});
 
 
 app.listen(PORT, () => {
-    console.log(`Server running at PORT - ${PORT}`);
+    console.log(`Server running at PORT - ${PORT} `);
 });
