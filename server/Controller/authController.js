@@ -28,21 +28,6 @@ export const signup = async (req, res, next) => {
 }
 export const signin = async (req, res, next) => {
     try {
-        // const { email, password } = req.body;
-        // const user = await User.findOne({ email });
-        // if (!user) {
-        //     res.status(400).json({ msg: "User does not exists" });
-        // }
-        // else {
-        //     const comparePassword = await bcryptjs.compare(password, user.password);
-        //     if (!comparePassword) {
-        //         res.status(400).json({ msg: "Invalid credentials" });
-        //     } else {
-        //         const { password: pass, ...rest } = user._doc;  //With the help of this it will not return password.
-        //         const token = jwt.sign({ id: user._id }, process.env.Jwt_Token);
-        //         return res.cookie('access_token', token, { httpOnly: true }).status(200).json({ rest });
-        //     }
-        // }
         const { email, password } = req.body;
         const user = await User.findOne({ email });
 
