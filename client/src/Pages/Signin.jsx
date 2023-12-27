@@ -17,7 +17,6 @@ export default function Signin() {
     };
     const signinbtn = async (e) => {
         e.preventDefault();
-        // setLoading(true);
         dispatch(signInStart());
         try {
             const res = await fetch('http://localhost:8080/api/auth/signin', {
@@ -25,22 +24,20 @@ export default function Signin() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                // withCredentials: true,
+                // sameSite: 'None',
+                // secure: true,
+                // credentials: 'include',
                 body: JSON.stringify(formData),
             });
             const data = await res.json();
             if (data.msg != undefined) {
-                // setLoading(false);
-                // setError(data.msg);
                 dispatch(signInFailure(data.msg));
                 return;
             }
-            // setLoading(false);
-            // setError(null);
             dispatch(signInSuccess(data));
             navigate("/");
         } catch (error) {
-            // setLoading(false);
-            // setError(error.message);
             dispatch(signInFailure(error.msg));
             alert(error.message);
         }

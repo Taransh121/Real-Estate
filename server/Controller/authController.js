@@ -20,7 +20,7 @@ export const signup = async (req, res, next) => {
                 username, email, password: hashedPassword
             });
             const savedUser = await newUser.save();
-            return res.status(200).json({ savedUser });
+            return res.status(200).json(savedUser);
         }
     } catch (error) {
         next(error);
@@ -42,7 +42,10 @@ export const signin = async (req, res, next) => {
                 const token = jwt.sign({ id: user._id }, process.env.Jwt_Token);
 
                 // Omit 'rest' from the response
-                return res.cookie('access_token', token, { httpOnly: true }).status(200).json(rest);
+                // return res.cookie('access_token', token, { httpOnly: true }).status(200).json({ token, rest });
+
+                res.cookie('access_token', token, { httpOnly: true });
+                return res.status(200).json(rest);
             }
         }
     } catch (error) {
