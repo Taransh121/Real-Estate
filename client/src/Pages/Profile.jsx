@@ -47,12 +47,14 @@ export default function Profile() {
         try {
             const res = await fetch(`http://localhost:8080/api/user/update/${currentUser._id}`, {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
             const data = await res.json();
+            console.log(data);
             if (data.msg != undefined) {
                 dispatch(updateUserFailure(data.msg));
                 return;

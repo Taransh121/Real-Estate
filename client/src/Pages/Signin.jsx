@@ -27,7 +27,7 @@ export default function Signin() {
                 // withCredentials: true,
                 // sameSite: 'None',
                 // secure: true,
-                // credentials: 'include',
+                credentials: 'include',
                 body: JSON.stringify(formData),
             });
             const data = await res.json();
