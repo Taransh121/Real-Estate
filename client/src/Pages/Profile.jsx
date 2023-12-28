@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from '../firebase';
-import { deleteUserFailure, deleteUserStart, deleteUserSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from '../Redux/User/UserSlice';
+import { deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserFailure, signOutUserStart, signOutUserSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from '../Redux/User/UserSlice';
 
 export default function Profile() {
     const fileRef = useRef(null);
@@ -84,6 +84,22 @@ export default function Profile() {
             alert(error.message);
         }
     }
+    const handleSignOut = async () => {
+        try {
+            dispatch(signOutUserStart());
+            const res = await fetch('http://localhost:8080/api/auth/signout', {
+                credentials: 'include',
+            });
+            const data = await res.json();
+            if (data.message != undefined) {
+                dispatch(signOutUserFailure(data.message));
+                return;
+            }
+            dispatch(signOutUserSuccess(data));
+        } catch (error) {
+            dispatch(signOutUserFailure(data.message));
+        }
+    };
     return (
         <div className='p-3 max-w-lg mx-auto'>
             <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
@@ -112,7 +128,7 @@ export default function Profile() {
             </form>
             <div className='flex justify-between mt-5'>
                 <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'>Delete Account</span>
-                <span className='text-red-700 cursor-pointer'>Signout</span>
+                <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>Signout</span>
             </div>
             <p className='text-red-700 mt-5'>{error ? error : ""}</p>
             <p className='text-green-700 mt-5'>{updateSuccess ? "User is updated successfully." : ""}</p>
