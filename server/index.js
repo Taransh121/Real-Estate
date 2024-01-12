@@ -9,6 +9,7 @@ const app = express();
 const PORT = 8080;
 import userRoute from "./Routes/userRoutes.js";
 import authRoute from "./Routes/authRoutes.js";
+import listingRoute from "./Routes/listingRoutes.js";
 
 //Configurations
 dotenv.config();
@@ -31,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Routes
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/listing", listingRoute);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
