@@ -49,7 +49,8 @@ export default function Profile() {
         e.preventDefault();
         dispatch(updateUserStart())
         try {
-            const res = await fetch(`http://localhost:8080/api/user/update/${currentUser._id}`, {
+            // const res = await fetch(`https://real-estate-bokm.onrender.com/api/user/update/${currentUser._id}`, {
+            const res = await fetch(`https://real-estate-bokm.onrender.com/api/user/update/${currentUser._id}`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -72,7 +73,7 @@ export default function Profile() {
     const handleDeleteUser = async () => {
         try {
             dispatch(deleteUserStart);
-            const res = await fetch(`http://localhost:8080/api/user/delete/${currentUser._id}`, {
+            const res = await fetch(`https://real-estate-bokm.onrender.com/api/user/delete/${currentUser._id}`, {
                 method: 'DELETE',
                 credentials: 'include',
             })
@@ -90,7 +91,7 @@ export default function Profile() {
     const handleSignOut = async () => {
         try {
             dispatch(signOutUserStart());
-            const res = await fetch('http://localhost:8080/api/auth/signout', {
+            const res = await fetch('https://real-estate-bokm.onrender.com/api/auth/signout', {
                 credentials: 'include',
             });
             const data = await res.json();
@@ -107,7 +108,7 @@ export default function Profile() {
     const handleShowListings = async () => {
         try {
             setShowListingsError(false);
-            const res = await fetch(`http://localhost:8080/api/user/listings/${currentUser._id}`, {
+            const res = await fetch(`https://real-estate-bokm.onrender.com/api/user/listings/${currentUser._id}`, {
                 credentials: 'include',
             });
             const data = await res.json();
@@ -123,7 +124,7 @@ export default function Profile() {
 
     const handleDeleteListing = async (listingId) => {
         try {
-            const res = await fetch(`http://localhost:8080/api/listing/delete/${listingId}`, {
+            const res = await fetch(`https://real-estate-bokm.onrender.com/api/listing/delete/${listingId}`, {
                 method: "DELETE",
                 credentials: 'include',
             });
