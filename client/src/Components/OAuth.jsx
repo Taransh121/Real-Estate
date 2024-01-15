@@ -12,7 +12,7 @@ export default function OAuth() {
             const provider = new GoogleAuthProvider(app);
             const auth = getAuth();
             const result = await signInWithPopup(auth, provider);
-            const res = await fetch('http://localhost:8080/api/auth/google', {
+            const res = await fetch('https://real-estate-bokm.onrender.com//api/auth/google', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

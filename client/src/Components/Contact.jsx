@@ -10,7 +10,7 @@ export default function Contact({ listing }) {
     useEffect(() => {
         const fetchLandlord = async () => {
             try {
-                const res = await fetch(`http://localhost:8080/api/user/${listing.userRef}`, {
+                const res = await fetch(`https://real-estate-bokm.onrender.com/api/user/${listing.userRef}`, {
                     credentials: 'include',
                 });
                 const data = await res.json();
