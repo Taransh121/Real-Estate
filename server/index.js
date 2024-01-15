@@ -10,6 +10,7 @@ const PORT = 8080;
 import userRoute from "./Routes/userRoutes.js";
 import authRoute from "./Routes/authRoutes.js";
 import listingRoute from "./Routes/listingRoutes.js";
+import path from "path";
 
 //Configurations
 dotenv.config();
@@ -17,33 +18,9 @@ app.use(express.json());
 app.use(cookieParser());
 // app.use(cors());
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
-// app.use(cors({
-//     origin: ['http://localhost:5173'],
-//     credentials: true,
-//     sameSite: 'none'
-// }));
-// app.use(cors({
-//     origin: 'http://127.0.0.1:5173/',
-//     credentials: true,
-// }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-//Routes
-app.use("/api/user", userRoute);
-app.use("/api/auth", authRoute);
-app.use("/api/listing", listingRoute);
-
-app.use((err, req, res, next) => {
-    const statusCode = err.statusCode || 500;
-    const message = err.message || 'Internal Server Error';
-    return res.status(statusCode).json({
-        success: false,
-        statusCode,
-        message,
-    });
-});
-
+const __dirname = path.resolve();
 
 // Database
 mongoose.set('strictQuery', false);
@@ -58,7 +35,30 @@ mongoose.connect(mongoURL, {
     console.log(error);
 });
 
-
 app.listen(PORT, () => {
     console.log(`Server running at PORT - ${PORT} `);
 });
+
+
+//Routes
+app.use("/api/user", userRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/listing", listingRoute);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
+
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
+    return res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message,
+    });
+});
+
+
+
