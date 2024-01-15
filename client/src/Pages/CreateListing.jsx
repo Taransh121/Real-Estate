@@ -124,7 +124,7 @@ export default function CreateListing() {
             if (+formData.regularPrice < +formData.discountPrice) return setError("Discounted price must be lower than Regular price")
             setLoading(true);
             setError(false);
-            const res = await fetch(`http://localhost:8080/api/listing/create`, {
+            const res = await fetch(`https://real-estate-bokm.onrender.com/api/listing/create`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

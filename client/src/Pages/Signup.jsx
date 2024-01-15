@@ -17,7 +17,7 @@ export default function Signup() {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await fetch('http://localhost:8080/api/auth/signup', {
+            const res = await fetch('https://real-estate-bokm.onrender.com/api/auth/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

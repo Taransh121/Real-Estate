@@ -38,7 +38,7 @@ export default function CreateListing() {
     useEffect(() => {
         const fetchListing = async () => {
             const listingId = params.listingId;
-            const res = await fetch(`http://localhost:8080/api/listing/get/${listingId}`);
+            const res = await fetch(`https://real-estate-bokm.onrender.com/api/listing/get/${listingId}`);
             const data = await res.json();
             // console.log(data);
             if (data.message != undefined) {
@@ -138,7 +138,7 @@ export default function CreateListing() {
             if (+formData.regularPrice < +formData.discountPrice) return setError("Discounted price must be lower than Regular price")
             setLoading(true);
             setError(false);
-            const res = await fetch(`http://localhost:8080/api/listing/update/${params.listingId}`, {
+            const res = await fetch(`https://real-estate-bokm.onrender.com/api/listing/update/${params.listingId}`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

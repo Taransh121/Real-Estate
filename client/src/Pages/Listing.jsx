@@ -21,7 +21,7 @@ export default function Listing() {
         const fetchListing = async () => {
             setLoading(true);
             try {
-                const res = await fetch(`http://localhost:8080/api/listing/get/${params.listingId}`);
+                const res = await fetch(`https://real-estate-bokm.onrender.com/api/listing/get/${params.listingId}`);
                 const data = await res.json();
                 // console.log(data);
                 if (data.message != undefined) {
