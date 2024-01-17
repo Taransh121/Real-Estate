@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
 import { useSelector } from 'react-redux';
@@ -115,7 +115,7 @@ export default function Listing() {
                             </li>
                         </ul>
                         {!currentUser && (
-                            <p className='text-green-700 hover:underline p-7 '>Signin to contact the Landlord.</p>
+                            <Link to={"/signin"} className='text-green-700 hover:underline hover:cursor-pointer '>Signin to contact the Landlord.</Link>
                         )}
                         {
                             currentUser && listing.userRef !== currentUser._id && !contact && (
