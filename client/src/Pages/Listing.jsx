@@ -114,6 +114,9 @@ export default function Listing() {
                                 {listing.furnished ? 'Furnished' : 'Unfurnished'}
                             </li>
                         </ul>
+                        {!currentUser && (
+                            <p className='text-green-700 hover:underline p-7 '>Signin to contact the Landlord.</p>
+                        )}
                         {
                             currentUser && listing.userRef !== currentUser._id && !contact && (
                                 <button onClick={() => setContact(true)} className='bg-slate-700 rounded-lg p-3 uppercase hover:opacity-95 text-white'>Contact Landlord</button>
