@@ -115,7 +115,7 @@ export default function Listing() {
                             </li>
                         </ul>
                         {!currentUser && (
-                            <Link to={"/signin"} className='text-green-700 hover:underline hover:cursor-pointer '>Signin to contact the Landlord.</Link>
+                            <Link to={"/signin"} className='text-green-700 hover:underline hover:cursor-pointer font-semibold'>Signin to contact the Landlord.</Link>
                         )}
                         {
                             currentUser && listing.userRef !== currentUser._id && !contact && (
