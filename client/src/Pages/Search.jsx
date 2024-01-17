@@ -113,7 +113,7 @@ export default function Search() {
         const urlParams = new URLSearchParams(location.search);
         urlParams.set("startIndex", startIndex);
         const searchQuery = urlParams.toString();
-        const res = await fetch(`http://localhost:8080/api/listing/get?${searchQuery}`);
+        const res = await fetch(`https://real-estate-bokm.onrender.com/api/listing/get?${searchQuery}`);
         const data = await res.json();
         if (data.length < 8) {
             setShowMore(false);
